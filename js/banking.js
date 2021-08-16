@@ -6,32 +6,30 @@ function getDepositValue(inputId) {
     inputField.value = '';
     return newAmount;
 }
-
+function getTotal(totalId, newAmount) {
+    const total = document.getElementById(totalId)
+    let previousTotal = parseFloat(total.innerText);
+    total.innerText = previousTotal + newAmount;
+}
 
 document.getElementById('deposit-button').addEventListener('click', function () {
     // call the function
-    newAmount = getDepositValue('deposit-input')
-    // get deposit total
-    const total = document.getElementById('deposit-total')
-    let previousTotal = parseFloat(total.innerText);
-    // adding deposit total
-    total.innerText = previousTotal + newAmount;
+    newDepositAmount = getDepositValue('deposit-input')
     // get balance total
+    getTotal('deposit-total', newDepositAmount)
     const balanceTotal = document.getElementById('balance-total');
     let previousBalanceTotal = parseFloat(balanceTotal.innerText);
     // adding balance total
-    balanceTotal.innerText = previousBalanceTotal + newAmount;
+    balanceTotal.innerText = previousBalanceTotal + newDepositAmount;
 
 })
 
 // withdraw
 
 document.getElementById('withdraw-button').addEventListener('click', function () {
-    newAmount = getDepositValue('withdraw-input')
-    const total = document.getElementById('withdraw-total');
-    const previousTotal = parseFloat(total.innerText);
-    total.innerText = previousTotal + newAmount;
+    newWithdrawAmount = getDepositValue('withdraw-input')
+    getTotal('withdraw-total', newWithdrawAmount)
     const balanceTotal = document.getElementById('balance-total');
     const previousBalanceTotal = parseFloat(balanceTotal.innerText)
-    balanceTotal.innerText = previousBalanceTotal - newAmount;
+    balanceTotal.innerText = previousBalanceTotal - newWithdrawAmount;
 })
